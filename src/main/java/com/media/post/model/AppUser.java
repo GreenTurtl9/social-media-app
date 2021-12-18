@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,6 +19,15 @@ public class AppUser {
 
     @JoinColumn(name = "user_name")
     private String name;
+
+    private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private AppUser friend;
+
+    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
+    private Set<AppUser> friends = new HashSet<AppUser>();
 
     @OneToMany(mappedBy = "appUser")
     private Set<Comment> comments;
