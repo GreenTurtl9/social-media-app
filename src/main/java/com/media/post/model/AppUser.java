@@ -23,11 +23,11 @@ public class AppUser {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "friend_id")
     private AppUser friend;
 
     @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
-    private Set<AppUser> friends = new HashSet<AppUser>();
+    private Set<AppUser> friends = new HashSet<>();
 
     @OneToMany(mappedBy = "appUser")
     private Set<Comment> comments;
